@@ -47,3 +47,11 @@
   max-width: 20em;
   margin: 0 auto;
 }
+.container {
+  display: block;
+  justify-content: center;
+  align-items: center;
+  border: solid 2px black;
+  padding: 100px;
+  background-color: azure;
+}

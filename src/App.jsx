@@ -14,22 +14,26 @@ function App() {
 
   return (
     <div className="App">
-      <p> Log in to your account</p>
-      <form onSubmit={handleSubmit(onSubmit)} className="form">
-        <label htmlFor="email">Email</label>
-        <input
-          type="email"
-          id="email"
-          {...register("email", { required: true })}
-        />
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          id="password"
-          {...register("password", { required: true })}
-        />
-        <button type="submit">Log in</button>
-      </form>
+      <div className="container">
+        <h2> Log in to your account</h2>
+        <form onSubmit={handleSubmit(onSubmit)} className="form">
+          <label htmlFor="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            {...register("email", { required: true })}
+            required
+          />
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            {...register("password", { required: true })}
+            required
+          />
+          <button type="submit">Log in</button>
+        </form>
+      </div>
     </div>
   );
 }
