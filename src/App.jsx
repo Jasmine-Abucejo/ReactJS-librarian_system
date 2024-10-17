@@ -1,5 +1,12 @@
 import "./App.css";
+import Home from "./Home";
 import { useForm } from "react-hook-form";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  useNavigate,
+} from "react-router-dom";
 
 function App() {
   const {
@@ -13,6 +20,7 @@ function App() {
     console.log(data);
     if (data.email !== umail || data.password !== upass) {
       alert("Invalid email or password");
+    } else {
     }
   };
 
