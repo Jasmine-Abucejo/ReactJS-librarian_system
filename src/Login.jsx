@@ -1,4 +1,4 @@
-import "./App.css";
+// import "./App.css";
 import Home from "./Home";
 import { useForm } from "react-hook-form";
 import {
@@ -16,7 +16,7 @@ function Login() {
     formState: { errors },
   } = useForm();
   const umail = "jasmine@gmail.com";
-  const upass = "1234";
+  const upass = "jasmine";
   const onSubmit = (data) => {
     console.log(data);
     if (data.email !== umail || data.password !== upass) {
@@ -27,8 +27,13 @@ function Login() {
   };
 
   return (
-    <div className="App">
-      <div className="container">
+    <div
+      className="Login"
+      style={{
+        marginLeft: "calc((100vw - (20vw + 200px))/2)",
+      }}
+    >
+      <div className="container" style={{ width: "20vw", height: "20vh" }}>
         <h1>Login to your Account</h1>
         <form onSubmit={handleSubmit(onSubmit)} className="form">
           <label htmlFor="email">Email</label>

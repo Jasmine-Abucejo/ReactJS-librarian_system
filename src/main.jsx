@@ -4,6 +4,7 @@ import React from "react";
 import "./index.css";
 import Login from "./Login";
 import Home from "./Home.jsx";
+import Dashboard from "./Dashboard.jsx";
 import {
   BrowserRouter as Router,
   Route,
@@ -18,6 +19,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
