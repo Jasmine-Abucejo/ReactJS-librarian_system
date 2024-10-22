@@ -1,5 +1,4 @@
-// import "./App.css";
-import Home from "./Home";
+import "./App.css";
 import { useForm } from "react-hook-form";
 import {
   BrowserRouter as Router,
@@ -31,9 +30,10 @@ function Login() {
       className="Login"
       style={{
         marginLeft: "calc((100vw - (20vw + 200px))/2)",
+        marginTop: "calc((100vh - (20vh + 200px))/2)",
       }}
     >
-      <div className="container" style={{ width: "20vw", height: "20vh" }}>
+      <div className="container" style={{ width: "20vw", minHeight: "20vh" }}>
         <h1>Login to your Account</h1>
         <form onSubmit={handleSubmit(onSubmit)} className="form">
           <label htmlFor="email">Email</label>
