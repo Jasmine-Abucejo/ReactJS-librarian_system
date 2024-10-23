@@ -6,10 +6,10 @@ import {
   useNavigate,
   BrowserRouter,
 } from "react-router-dom";
-function Dashboard() {
+function Home() {
   const navigate = useNavigate();
   const handleAccounts = () => {
-    navigate("/accounts");
+    navigate("/home/accounts");
   };
   return (
     <div>
@@ -24,13 +24,13 @@ function Dashboard() {
   );
 }
 
-function Home() {
-  return (
-    <Routes>
-      <Route path="/" element={<Dashboard />}>
-        <Route path="accounts" element={<Accounts />} />
-      </Route>
-    </Routes>
-  );
-}
+// function Home() {
+//   return (
+//     <Routes>
+//       <Route path="/" element={<Dashboard />}>
+//         <Route path="accounts" element={<Accounts />} />
+//       </Route>
+//     </Routes>
+//   );
+// }
 export default Home;
