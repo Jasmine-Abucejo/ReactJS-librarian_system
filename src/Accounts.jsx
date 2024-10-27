@@ -7,7 +7,7 @@ function Accounts() {
           style={{
             border: "solid black",
             borderCollapse: "collapse",
-            width: 1000,
+            width: "60vw",
           }}
         >
           <thead style={{ background: "teal" }}>
