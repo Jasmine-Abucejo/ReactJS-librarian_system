@@ -1,4 +1,3 @@
-import "./App.css";
 import { useForm } from "react-hook-form";
 import {
   BrowserRouter as Router,
@@ -33,23 +32,46 @@ function Login() {
         marginTop: "calc((100vh - (20vh + 200px))/2)",
       }}
     >
-      <div className="container" style={{ width: "20vw", minHeight: "20vh" }}>
+      <div
+        className="container"
+        style={{
+          width: "20vw",
+          minHeight: "20vh",
+          justifyContent: "center",
+          alignItems: "center",
+          border: "solid 2px black",
+          padding: "100px",
+          backgroundColor: "azure",
+          marginRight: "100px",
+        }}
+      >
         <h1>Login to your Account</h1>
-        <form onSubmit={handleSubmit(onSubmit)} className="form">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="form"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            maxWidth: "20em",
+            margin: "0 auto",
+            gap: "1em",
+            textAlign: "center",
+          }}
+        >
           <label htmlFor="email">Email</label>
           <input
             type="email"
             id="email"
             {...register("email", { required: true })}
+            required
           />
-          {errors.email && <p>Email is required</p>}
           <label htmlFor="password">Password</label>
           <input
             type="password"
             id="password"
             {...register("password", { required: true })}
+            required
           />
-          {errors.password && <p>Password is required</p>}
           <button type="submit">Submit</button>
         </form>
       </div>
