@@ -1,7 +1,7 @@
-function Accounts() {
+function LibAccounts() {
   return (
     <div>
-      <h1>Student Accounts</h1>
+      <h1>Librarian Accounts</h1>
       <div>
         <table
           style={{
@@ -10,15 +10,11 @@ function Accounts() {
             width: "60vw",
           }}
         >
-          <thead style={{ background: "teal" }}>
+          <thead style={{ background: "#6bc9c9" }}>
             <tr>
               <th>Name</th>
-
-              <th>Year Level</th>
-              <th>Course</th>
-
+              <th>Position</th>
               <th>Email</th>
-
               <th>Phone</th>
             </tr>
           </thead>
@@ -27,4 +23,5 @@ function Accounts() {
     </div>
   );
 }
-export default Accounts;
+
+export default LibAccounts;

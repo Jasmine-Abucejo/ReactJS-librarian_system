@@ -2,16 +2,19 @@ import { Outlet, useNavigate } from "react-router-dom";
 function Home() {
   const navigate = useNavigate();
   const handleAccounts = () => {
-    console.log(document.getElementById("modal").style.display);
+    // console.log(document.getElementById("modal").style.display);
 
-    if ((document.getElementById("modal").style.display = "none")) {
+    if (document.getElementById("modal").style.display === "none") {
       document.getElementById("modal").style.display = "flex";
-    } else if ((document.getElementById("modal").style.display = "flex")) {
+    } else if (document.getElementById("modal").style.display === "flex") {
       document.getElementById("modal").style.display = "none";
     }
   };
   const studAccount = () => {
-    navigate("/home/accounts");
+    navigate("/home/studaccounts");
+  };
+  const libAccount = () => {
+    navigate("/home/libaccounts");
   };
   return (
     <div
@@ -26,6 +29,8 @@ function Home() {
           height: "95vh",
           width: "20vw",
           borderRight: "solid",
+          marginRight: "1em",
+          paddingRight: "1em",
           display: "flex",
           flexDirection: "column",
           textAlign: "center",
@@ -43,8 +48,11 @@ function Home() {
           >
             Student Account
           </button>
-          <button style={{ background: "#6bc9c9" }}>Librarian Account</button>
+          <button style={{ background: "#6bc9c9" }} onClick={libAccount}>
+            Librarian Account
+          </button>
         </div>
+        <button>History</button>
       </div>
       {/* This element will render either <DashboardMessages> when the URL is
           "/messages", <DashboardTasks> at "/tasks", or null if it is "/"

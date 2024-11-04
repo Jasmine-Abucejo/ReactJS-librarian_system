@@ -4,6 +4,7 @@ import "./index.css";
 import Login from "./Login";
 import Home from "./Home.jsx";
 import Accounts from "./Accounts.jsx";
+import LibAccounts from "./LibAccounts.jsx";
 
 import {
   BrowserRouter as Router,
@@ -19,7 +20,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/home" element={<Home />}>
-          <Route path="/home/accounts" element={<Accounts />} />
+          <Route path="/home/studaccounts" element={<Accounts />} />
+          <Route path="/home/libaccounts" element={<LibAccounts />} />
         </Route>
       </Routes>
     </BrowserRouter>
