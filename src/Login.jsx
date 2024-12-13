@@ -1,10 +1,5 @@
 import { useForm } from "react-hook-form";
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  useNavigate,
-} from "react-router-dom";
+import { BrowserRouter as Router, useNavigate } from "react-router-dom";
 
 function Login() {
   const navigate = useNavigate();

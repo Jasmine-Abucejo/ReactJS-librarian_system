@@ -16,6 +16,10 @@ function Home() {
   const libAccount = () => {
     navigate("/home/libaccounts");
   };
+
+  function toDash() {
+    navigate("/home/dashboard");
+  }
   return (
     <div
       style={{
@@ -38,7 +42,7 @@ function Home() {
         }}
       >
         <h1>Home</h1>
-        <button>Dashboard</button>
+        <button onClick={toDash}>Dashboard</button>
         <button>Violations</button>
         <button onClick={handleAccounts}>Accounts</button>
         <div id="modal" style={{ marginTop: 10, display: "none" }}>
