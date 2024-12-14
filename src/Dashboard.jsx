@@ -1,16 +1,67 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 function Dashboard() {
   const [isOn, setIsOn] = useState(false);
+  const [newRecord, setNewRecord] = useState([]);
+  const [courseOptions, setCourseOptions] = useState([
+    { value: "BSIT", label: "BSIT" },
+    { value: "BSCS", label: "BSCS" },
+  ]);
+  const bookTitle = useRef();
+  const borrowerName = useRef();
+  const borrowerCourse = useRef();
+  const borrowerYearLevel = useRef();
+  const borrowerCollege = useRef("");
+  const timeBorrowed = useRef();
+
+  const ceitOptions = [
+    { value: "BSIT", label: "BSIT" },
+    { value: "BSCS", label: "BSCS" },
+  ];
+  const ccjOptions = [
+    { value: "BSHRM", label: "BSHRM" },
+    { value: "BSBA", label: "BSBA" },
+  ];
+  const cemdsOptions = [
+    { value: "BSN", label: "BSN" },
+    { value: "BSPT", label: "BSPT" },
+  ];
+
+  const toggleCollege = (e) => {
+    if (e.target.value === "CEIT") {
+      setCourseOptions(ceitOptions);
+      console.log(courseOptions);
+      console.log("CEIT");
+    } else if (e.target.value === "CCJ") {
+      setCourseOptions(ccjOptions);
+      console.log(courseOptions);
+      console.log("CCJ");
+    }
+  };
+
+  function addRecord(e) {
+    e.preventDefault();
+    const newEntry = {
+      bookTitle: bookTitle.current.value,
+      borrowerName: borrowerName.current.value,
+      borrowerCourse: borrowerCourse.current.value,
+      borrowerYearLevel: borrowerYearLevel.current.value,
+      timeBorrowed: new Date().toLocaleString(),
+    };
+    setNewRecord((n) => [...n, newEntry]);
+    bookTitle.current.value = "";
+    borrowerName.current.value = "";
+    borrowerCourse.current.value = "";
+    borrowerYearLevel.current.value = "";
+    setIsOn(false);
+    console.log(borrowerCourse.current);
+  }
   useEffect(() => {
     isOn
       ? (document.getElementById("add-popup").style.display = "flex")
       : (document.getElementById("add-popup").style.display = "none");
   }, [isOn]);
-  function triggerPopup() {
-    document.getElementById("add-popup").style.display = "flex";
-    document.getElementById("add-popup").style.flex = 1;
-  }
+
   return (
     <div style={{ position: "relative" }}>
       <h1>Borrowed Today</h1>
@@ -20,6 +71,7 @@ function Dashboard() {
             border: "solid black",
             borderCollapse: "collapse",
             width: "60vw",
+            textAlign: "center",
           }}
         >
           <thead style={{ background: "aquamarine" }}>
@@ -33,6 +85,17 @@ function Dashboard() {
               <th>Time Borrowed</th>
             </tr>
           </thead>
+          <tbody>
+            {newRecord.map((record, index) => (
+              <tr key={index}>
+                <td>{record.bookTitle}</td>
+                <td>{record.borrowerName}</td>
+                <td>{record.borrowerCourse}</td>
+                <td>{record.borrowerYearLevel}</td>
+                <td>{record.timeBorrowed}</td>
+              </tr>
+            ))}
+          </tbody>
         </table>
       </div>
       <button
@@ -41,9 +104,7 @@ function Dashboard() {
           padding: "5px",
           marginRight: "10px",
         }}
-        onClick={() => {
-          setIsOn(!isOn);
-        }}
+        onClick={() => setIsOn(!isOn)}
       >
         Add Record
       </button>
@@ -53,14 +114,74 @@ function Dashboard() {
           zIndex: 1,
           position: "absolute",
           border: "solid black 2px",
-          backgroundColor: "aquamarine",
-          width: "40vw",
-          height: "40vh",
+          backgroundColor: "white",
+          width: "60%",
+          height: "60%",
           top: "10vh",
           left: "10vw",
+          textAlign: "center",
+          justifyContent: "center",
+          flexDirection: "row",
         }}
         id="add-popup"
-      ></div>
+      >
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          <h3>Add Record</h3>
+          <form
+            onSubmit={addRecord}
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "10px",
+              flex: 1,
+            }}
+          >
+            <label htmlFor="book-title"> Book Title: </label>
+            <input type="text" id="book-title" ref={bookTitle} />
+            <label htmlFor="borrower-name"> Borrower Name: </label>
+            <input type="text" id="borrower-name" ref={borrowerName} />
+            <label htmlFor="borrower-college"> Borrower College: </label>
+            <select
+              name="college"
+              id="borrower-college"
+              ref={borrowerCollege}
+              onChange={toggleCollege}
+            >
+              <option value="" disabled>
+                --Select College--
+              </option>
+              <option value="CEIT">CEIT</option>
+              <option value="CCJ">CCJ</option>
+              <option value="CEMDS">CEMDS</option>
+            </select>
+            <label htmlFor="borrower-course"> Borrower Course: </label>
+            <select name="course" id="borrower-course" ref={borrowerCourse}>
+              <option value="" disabled>
+                --Select Course--
+              </option>
+              {courseOptions.map((option) => {
+                <option value={option.value}>{option.label}</option>;
+              })}
+            </select>
+            {/* <label htmlFor="borrower-course"> Borrower Course: </label>
+            <input type="text" id="borrower-course" ref={borrowerCourse} /> */}
+            <label htmlFor="borrower-year-level"> Borrower Year Level: </label>
+            <input
+              type="text"
+              id="borrower-year-level"
+              ref={borrowerYearLevel}
+            />
+            <button>Add Record</button>
+          </form>
+        </div>
+      </div>
     </div>
   );
 }
