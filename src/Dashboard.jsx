@@ -3,10 +3,7 @@ import { useState, useEffect, useRef } from "react";
 function Dashboard() {
   const [isOn, setIsOn] = useState(false);
   const [newRecord, setNewRecord] = useState([]);
-  const [courseOptions, setCourseOptions] = useState([
-    { value: "BSIT", label: "BSIT" },
-    { value: "BSCS", label: "BSCS" },
-  ]);
+  const [courses, setCourses] = useState([]);
   const bookTitle = useRef();
   const borrowerName = useRef();
   const borrowerCourse = useRef();
@@ -29,13 +26,17 @@ function Dashboard() {
 
   const toggleCollege = (e) => {
     if (e.target.value === "CEIT") {
-      setCourseOptions(ceitOptions);
-      console.log(courseOptions);
+      setCourses(ceitOptions);
+      console.log(courses.map((course) => course.label));
       console.log("CEIT");
     } else if (e.target.value === "CCJ") {
-      setCourseOptions(ccjOptions);
-      console.log(courseOptions);
+      setCourses(ccjOptions);
+      console.log(courses);
       console.log("CCJ");
+    } else if (e.target.value === "CEMDS") {
+      setCourses(cemdsOptions);
+      console.log(courses);
+      console.log("CEMDS");
     }
   };
 
@@ -122,6 +123,7 @@ function Dashboard() {
           textAlign: "center",
           justifyContent: "center",
           flexDirection: "row",
+          overflow: "auto",
         }}
         id="add-popup"
       >
@@ -154,21 +156,20 @@ function Dashboard() {
               ref={borrowerCollege}
               onChange={toggleCollege}
             >
-              <option value="" disabled>
-                --Select College--
-              </option>
+              <option value="">--Select College--</option>
               <option value="CEIT">CEIT</option>
               <option value="CCJ">CCJ</option>
               <option value="CEMDS">CEMDS</option>
             </select>
             <label htmlFor="borrower-course"> Borrower Course: </label>
             <select name="course" id="borrower-course" ref={borrowerCourse}>
-              <option value="" disabled>
-                --Select Course--
-              </option>
-              {courseOptions.map((option) => {
-                <option value={option.value}>{option.label}</option>;
-              })}
+              <option value="">--Select Course--</option>
+
+              {courses.map((course, index) => (
+                <option key={index} value={course.value}>
+                  {course.label}
+                </option>
+              ))}
             </select>
             {/* <label htmlFor="borrower-course"> Borrower Course: </label>
             <input type="text" id="borrower-course" ref={borrowerCourse} /> */}
@@ -178,6 +179,7 @@ function Dashboard() {
               id="borrower-year-level"
               ref={borrowerYearLevel}
             />
+
             <button>Add Record</button>
           </form>
         </div>
