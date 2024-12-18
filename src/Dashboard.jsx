@@ -8,8 +8,9 @@ function Dashboard() {
   const borrowerName = useRef();
   const borrowerCourse = useRef();
   const borrowerYearLevel = useRef();
-  const borrowerCollege = useRef("");
+  const borrowerCollege = useRef();
   const timeBorrowed = useRef();
+  const returnDate = useRef();
 
   const ceitOptions = [
     { value: "BSIT", label: "BSIT" },
@@ -48,25 +49,31 @@ function Dashboard() {
       borrowerCourse: borrowerCourse.current.value,
       borrowerYearLevel: borrowerYearLevel.current.value,
       timeBorrowed: new Date().toLocaleString(),
+      returnDate: returnDate.current.value.toLocaleString(),
     };
     setNewRecord((n) => [...n, newEntry]);
     bookTitle.current.value = "";
     borrowerName.current.value = "";
     borrowerCourse.current.value = "";
     borrowerYearLevel.current.value = "";
+    returnDate.current.value = "";
     setIsOn(false);
     console.log(borrowerCourse.current);
   }
   useEffect(() => {
     isOn
-      ? (document.getElementById("add-popup").style.display = "flex")
-      : (document.getElementById("add-popup").style.display = "none");
+      ? ((document.getElementById("add-popup").style.display = "flex"),
+        (document.getElementById("dash-contents").style.opacity = "0.3"),
+        (document.getElementById("popupTrigger").textContent = "Close"))
+      : ((document.getElementById("add-popup").style.display = "none"),
+        (document.getElementById("dash-contents").style.opacity = "1"),
+        (document.getElementById("popupTrigger").textContent = "Add Record"));
   }, [isOn]);
 
   return (
     <div style={{ position: "relative" }}>
-      <h1>Borrowed Today</h1>
-      <div>
+      <div id="dash-contents">
+        <h1>Borrowed Today</h1>
         <table
           style={{
             border: "solid black",
@@ -84,6 +91,7 @@ function Dashboard() {
               <th>Course</th>
 
               <th>Time Borrowed</th>
+              <th>Return Date</th>
             </tr>
           </thead>
           <tbody>
@@ -91,9 +99,11 @@ function Dashboard() {
               <tr key={index}>
                 <td>{record.bookTitle}</td>
                 <td>{record.borrowerName}</td>
-                <td>{record.borrowerCourse}</td>
                 <td>{record.borrowerYearLevel}</td>
+                <td>{record.borrowerCourse}</td>
+
                 <td>{record.timeBorrowed}</td>
+                <td>{record.returnDate}</td>
               </tr>
             ))}
           </tbody>
@@ -101,10 +111,11 @@ function Dashboard() {
       </div>
       <button
         style={{
-          marginTop: "10px",
+          marginTop: "70vh",
           padding: "5px",
-          marginRight: "10px",
+          marginLeft: "60vw",
         }}
+        id="popupTrigger"
         onClick={() => setIsOn(!isOn)}
       >
         Add Record
@@ -116,10 +127,10 @@ function Dashboard() {
           position: "absolute",
           border: "solid black 2px",
           backgroundColor: "white",
-          width: "60%",
-          height: "60%",
-          top: "10vh",
-          left: "10vw",
+          width: "80%",
+          height: "80%",
+          top: "10%",
+          left: "10%",
           textAlign: "center",
           justifyContent: "center",
           flexDirection: "row",
@@ -146,15 +157,16 @@ function Dashboard() {
             }}
           >
             <label htmlFor="book-title"> Book Title: </label>
-            <input type="text" id="book-title" ref={bookTitle} />
+            <input type="text" id="book-title" ref={bookTitle} required />
             <label htmlFor="borrower-name"> Borrower Name: </label>
-            <input type="text" id="borrower-name" ref={borrowerName} />
+            <input type="text" id="borrower-name" ref={borrowerName} required />
             <label htmlFor="borrower-college"> Borrower College: </label>
             <select
               name="college"
               id="borrower-college"
               ref={borrowerCollege}
               onChange={toggleCollege}
+              required
             >
               <option value="">--Select College--</option>
               <option value="CEIT">CEIT</option>
@@ -162,7 +174,12 @@ function Dashboard() {
               <option value="CEMDS">CEMDS</option>
             </select>
             <label htmlFor="borrower-course"> Borrower Course: </label>
-            <select name="course" id="borrower-course" ref={borrowerCourse}>
+            <select
+              name="course"
+              id="borrower-course"
+              ref={borrowerCourse}
+              required
+            >
               <option value="">--Select Course--</option>
 
               {courses.map((course, index) => (
@@ -171,16 +188,24 @@ function Dashboard() {
                 </option>
               ))}
             </select>
-            {/* <label htmlFor="borrower-course"> Borrower Course: </label>
-            <input type="text" id="borrower-course" ref={borrowerCourse} /> */}
-            <label htmlFor="borrower-year-level"> Borrower Year Level: </label>
-            <input
-              type="text"
-              id="borrower-year-level"
+            <label htmlFor="year-level">Year Level: </label>
+            <select
+              name="year-level"
+              id="year-level"
               ref={borrowerYearLevel}
-            />
+              required
+            >
+              <option value="">--Select Year Level--</option>
+              <option value="1">1st Year</option>
+              <option value="2">2nd Year</option>
+              <option value="3">3rd Year</option>
+              <option value="4">4th Year</option>
+              <option value="5">5th Year</option>
+            </select>
+            <label htmlFor="return-date">Return Date: </label>
+            <input type="date" id="return-date" ref={returnDate} required />
 
-            <button>Add Record</button>
+            <button style={{ marginBottom: "10px" }}>Add Record</button>
           </form>
         </div>
       </div>

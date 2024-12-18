@@ -11,12 +11,13 @@ function Login() {
   const umail = "jasmine@gmail.com";
   const upass = "jasmine";
   const onSubmit = (data) => {
-    console.log(data);
-    if (data.email !== umail || data.password !== upass) {
-      alert("Invalid email or password");
-    } else {
-      navigate("/home");
-    }
+    // console.log(data);
+    // if (data.email !== umail || data.password !== upass) {
+    //   alert("Invalid email or password");
+    // } else {
+    //   navigate("/home");
+    // }
+    navigate("/home");
   };
 
   return (
