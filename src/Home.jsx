@@ -20,6 +20,9 @@ function Home() {
   function toDash() {
     navigate("/home/dashboard");
   }
+  function toCurrent() {
+    navigate("/home/currents");
+  }
   return (
     <div
       style={{
@@ -43,6 +46,7 @@ function Home() {
       >
         <h1>Home</h1>
         <button onClick={toDash}>Dashboard</button>
+        <button onClick={toCurrent}>All Currently Borrowed</button>
         <button>Violations</button>
         <button onClick={handleAccounts}>Accounts</button>
         <div id="modal" style={{ marginTop: 10, display: "none" }}>

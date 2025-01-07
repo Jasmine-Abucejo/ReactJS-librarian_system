@@ -6,6 +6,7 @@ import Home from "./Home.jsx";
 import Accounts from "./Accounts.jsx";
 import LibAccounts from "./LibAccounts.jsx";
 import Dashboard from "./Dashboard.jsx";
+import Current from "./Current.jsx";
 
 import {
   BrowserRouter as Router,
@@ -19,8 +20,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />}>
+          <Route path="/home/currents" element={<Current />} />
           <Route path="/home/studaccounts" element={<Accounts />} />
           <Route path="/home/libaccounts" element={<LibAccounts />} />
           <Route path="/home/dashboard" element={<Dashboard />} />

@@ -2,7 +2,17 @@ import { useState, useEffect, useRef } from "react";
 
 function Dashboard() {
   const [isOn, setIsOn] = useState(false);
-  const [newRecord, setNewRecord] = useState([]);
+  const [newRecord, setNewRecord] = useState([
+    {
+      bookTitle: "Kafka on the Shore",
+      borrowerName: "Jasmine Abucejo",
+      borrowerCourse: "BSCS",
+      borrowerYearLevel: "4",
+      timeBorrowed: new Date().toLocaleString(),
+      returnDate: new Date().toLocaleString(),
+    },
+  ]);
+
   const [courses, setCourses] = useState([]);
   const bookTitle = useRef();
   const borrowerName = useRef();
