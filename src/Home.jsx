@@ -23,6 +23,26 @@ function Home() {
   function toCurrent() {
     navigate("/home/currents");
   }
+  const allCurrent = [
+    {
+      bookTitle: "Kafka on the Shore",
+      borrowerName: "Jasmine Abucejo",
+      borrowerCourse: "BSCS",
+      borrowerYearLevel: "5",
+      timeBorrowed: new Date().toLocaleString(),
+      returnDate: new Date().toLocaleString(),
+      isReturned: false,
+    },
+    {
+      bookTitle: "Before the Coffee Gets Cold",
+      borrowerName: "Jasmine Abucejo",
+      borrowerCourse: "BSCS",
+      borrowerYearLevel: "5",
+      timeBorrowed: new Date().toLocaleString(),
+      returnDate: new Date().toLocaleString(),
+      isReturned: false,
+    },
+  ];
   return (
     <div
       style={{
@@ -65,6 +85,7 @@ function Home() {
       {/* This element will render either <DashboardMessages> when the URL is
           "/messages", <DashboardTasks> at "/tasks", or null if it is "/"
       */}
+
       <div
         style={{
           display: "flex",
@@ -74,7 +95,7 @@ function Home() {
           height: "95vh",
         }}
       >
-        <Outlet />
+        <Outlet context={allCurrent} />
       </div>
     </div>
   );
