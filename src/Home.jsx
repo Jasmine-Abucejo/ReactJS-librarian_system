@@ -32,6 +32,7 @@ function Home() {
       timeBorrowed: new Date().toLocaleString(),
       returnDate: new Date().toLocaleString(),
       isReturned: false,
+      violation: "",
     },
     {
       bookTitle: "Before the Coffee Gets Cold",
@@ -41,6 +42,7 @@ function Home() {
       timeBorrowed: new Date().toLocaleString(),
       returnDate: new Date().toLocaleString(),
       isReturned: false,
+      violation: "",
     },
   ];
   return (

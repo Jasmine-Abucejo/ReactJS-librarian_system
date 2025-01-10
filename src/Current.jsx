@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { set } from "react-hook-form";
 import { useOutletContext } from "react-router-dom";
 
 function Current() {
@@ -7,26 +8,29 @@ function Current() {
   const passedRecord = useOutletContext();
   const [currentRecord, setCurrentRecord] = useState(passedRecord);
   const toggleReturn = (e) => {
-    document.getElementById("currents").style.opacity = 0.3;
-    document.getElementById("currents").style.pointerEvents = "none";
     setIsReturned(!isReturned);
     console.log(isReturned);
     setRowId(e.target.id);
-
-    // console.log(rowId);
   };
-  // useEffect(() => {
-  //   setCurrentRecord((c) =>
-  //     c.map((record, index) => {
-  //       index === rowId ? console.log(record) : record;
-  //     })
-  //   );
-  //   console.log(currentRecord[rowId]);
-  //   console.log(rowId);
-  // }, [rowId]);
+
+  const updateValue = (e) => {
+    setCurrentRecord((c) => {
+      c[rowId].isReturned = true;
+      return c;
+    });
+    console.log(currentRecord[rowId]);
+    setIsReturned(!isReturned);
+  };
+
   return (
     <div style={{ position: "relative" }}>
-      <div id="currents">
+      <div
+        id="currents"
+        style={{
+          opacity: isReturned ? 0.3 : 1,
+          pointerEvents: isReturned ? "none" : "auto",
+        }}
+      >
         <h1>All Currently Borrowed Books</h1>
         <table
           style={{
@@ -104,8 +108,8 @@ function Current() {
             {""} borrowed by{" "}
             <strong>{currentRecord[rowId]?.borrowerName}</strong>?
           </p>
-          <button>Yes</button>
-          <button>No</button>
+          <button onClick={updateValue}>Yes</button>
+          <button onClick={() => setIsReturned(!isReturned)}>Cancel</button>
         </div>
       </div>
     </div>
