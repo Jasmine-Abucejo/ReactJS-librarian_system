@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect } from "react";
-import { set } from "react-hook-form";
 import { useOutletContext } from "react-router-dom";
 
 function Current() {
@@ -13,7 +12,7 @@ function Current() {
     setRowId(e.target.id);
   };
 
-  const updateValue = (e) => {
+  const updateValue = () => {
     setCurrentRecord((c) => {
       c[rowId].isReturned = true;
       return c;
@@ -108,8 +107,17 @@ function Current() {
             {""} borrowed by{" "}
             <strong>{currentRecord[rowId]?.borrowerName}</strong>?
           </p>
-          <button onClick={updateValue}>Yes</button>
-          <button onClick={() => setIsReturned(!isReturned)}>Cancel</button>
+          <button onClick={updateValue} style={{ marginRight: "1rem" }}>
+            Yes
+          </button>
+          <button
+            onClick={() => {
+              setIsReturned(!isReturned);
+              document.getElementById(rowId).checked = false;
+            }}
+          >
+            Cancel
+          </button>
         </div>
       </div>
     </div>

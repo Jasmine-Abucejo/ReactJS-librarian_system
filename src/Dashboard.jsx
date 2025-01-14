@@ -1,17 +1,11 @@
 import { useState, useEffect, useRef } from "react";
+import { useOutletContext } from "react-router-dom";
+import { VscChromeClose } from "react-icons/vsc";
 
 function Dashboard() {
   const [isOn, setIsOn] = useState(false);
-  const [newRecord, setNewRecord] = useState([
-    {
-      bookTitle: "Kafka on the Shore",
-      borrowerName: "Jasmine Abucejo",
-      borrowerCourse: "BSCS",
-      borrowerYearLevel: "4",
-      timeBorrowed: new Date().toLocaleString(),
-      returnDate: new Date().toLocaleString(),
-    },
-  ]);
+  const passedRecord = useOutletContext();
+  const [newRecord, setNewRecord] = useState(passedRecord);
 
   const [courses, setCourses] = useState([]);
   const bookTitle = useRef();
@@ -71,19 +65,15 @@ function Dashboard() {
     console.log(borrowerCourse.current);
   }
 
-  useEffect(() => {
-    isOn
-      ? ((document.getElementById("add-popup").style.display = "flex"),
-        (document.getElementById("dash-contents").style.opacity = "0.3"),
-        (document.getElementById("popupTrigger").textContent = "Close"))
-      : ((document.getElementById("add-popup").style.display = "none"),
-        (document.getElementById("dash-contents").style.opacity = "1"),
-        (document.getElementById("popupTrigger").textContent = "Add Record"));
-  }, [isOn]);
-
   return (
     <div style={{ position: "relative" }}>
-      <div id="dash-contents">
+      <div
+        id="dash-contents"
+        style={{
+          opacity: isOn ? 0.3 : 1,
+          pointerEvents: isOn ? "none" : "auto",
+        }}
+      >
         <h1>Borrowed Today</h1>
         <table
           style={{
@@ -119,21 +109,22 @@ function Dashboard() {
             ))}
           </tbody>
         </table>
+        <button
+          style={{
+            marginTop: "70vh",
+            padding: "5px",
+            marginLeft: "60vw",
+          }}
+          id="popupTrigger"
+          onClick={() => setIsOn(!isOn)}
+        >
+          Add Record
+        </button>
       </div>
-      <button
-        style={{
-          marginTop: "70vh",
-          padding: "5px",
-          marginLeft: "60vw",
-        }}
-        id="popupTrigger"
-        onClick={() => setIsOn(!isOn)}
-      >
-        Add Record
-      </button>
+
       <div
         style={{
-          display: "none",
+          display: isOn ? "flex" : "none",
           zIndex: 1,
           position: "absolute",
           border: "solid black 2px",
@@ -149,6 +140,17 @@ function Dashboard() {
         }}
         id="add-popup"
       >
+        <VscChromeClose
+          style={{
+            position: "absolute",
+            left: "1%",
+            top: "1%",
+            border: "solid black 1px",
+            marginBottom: "80px",
+          }}
+          onClick={() => setIsOn(!isOn)}
+        />
+
         <div
           style={{
             display: "flex",

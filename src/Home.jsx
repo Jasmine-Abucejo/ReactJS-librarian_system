@@ -1,4 +1,6 @@
 import { Outlet, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+
 function Home() {
   const navigate = useNavigate();
   const handleAccounts = () => {
@@ -18,11 +20,15 @@ function Home() {
   };
 
   function toDash() {
-    navigate("/home/dashboard");
+    navigate("/");
   }
   function toCurrent() {
-    navigate("/home/currents");
+    navigate("/currents");
   }
+
+  // useEffect(() => {
+  //   toDash();
+  // }, [] );
   const allCurrent = [
     {
       bookTitle: "Kafka on the Shore",
